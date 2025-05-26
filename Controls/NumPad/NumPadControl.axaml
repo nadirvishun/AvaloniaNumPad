@@ -1,0 +1,133 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:n="using:AvaloniaNumPad.Controls"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="AvaloniaNumPad.Controls.NumPadControl">
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" >
+        <StackPanel.Styles>
+            <Style Selector="n|NumPadButton">
+                <Setter Property="Focusable" Value="False" />
+                <Setter Property="Command" Value="{Binding $parent[n:NumPadControl].ProcessClick}" />
+                <Setter Property="CommandParameter" Value="{Binding $self.Key}" />
+                <Setter Property="Width" Value="70" />
+                <Setter Property="Height" Value="70" />
+                <Setter Property="UseLayoutRounding" Value="False" />
+                <Setter Property="HorizontalAlignment" Value="Stretch" />
+                <Setter Property="VerticalAlignment" Value="Stretch" />
+                <Setter Property="Margin" Value="4" />
+                <Setter Property="FontWeight" Value="Bold" />
+                <Setter Property="FontSize" Value="18" />
+                <Setter Property="Cursor" Value="Hand" />
+                <Setter Property="Background" Value="{DynamicResource ButtonDefaultBackground}" />
+                <Setter Property="CornerRadius" Value="3" />
+                <Setter Property="Template">
+                    <ControlTemplate TargetType="n:NumPadButton">
+                        <Border
+                            Name="PART_Background"
+                            Background="{TemplateBinding Background}"
+                            CornerRadius="{TemplateBinding CornerRadius}">
+                            <Panel>
+                                <ContentPresenter
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Content="{TemplateBinding Content}" />
+                            </Panel>
+                        </Border>
+                    </ControlTemplate>
+                </Setter>
+                <Style Selector="^:pointerover /template/ Border#PART_Background">
+                    <Setter Property="Background" Value="{DynamicResource ButtonDefaultPointeroverBackground}" />
+                </Style>
+                <Style Selector="^:pressed /template/ Border#PART_Background">
+                    <Setter Property="Background" Value="{DynamicResource ButtonDefaultPressedBackground}" />
+                </Style>
+            </Style>
+        </StackPanel.Styles>
+        <TextBox MaxWidth="305" Height="50" FontSize="18" Text="{Binding $parent[n:NumPadControl].Text}" Watermark="请输入" IsReadOnly="True"></TextBox>
+        <Grid  HorizontalAlignment="Left"
+              VerticalAlignment="Center"
+              ColumnDefinitions="*,*,*,*"
+              RowDefinitions="*,*,*,*,*">
+            <n:NumPadButton Grid.Row="0"
+                            Grid.Column="0"
+                            Key="NumPad7">
+                7
+            </n:NumPadButton>
+            <n:NumPadButton Grid.Row="0"
+                            Grid.Column="1"
+                            Key="NumPad8">
+                8
+            </n:NumPadButton>
+            <n:NumPadButton Grid.Row="0"
+                            Grid.Column="2"
+                            Key="NumPad9">
+                9
+            </n:NumPadButton>
+            <n:NumPadButton Height="{x:Static x:Double.NaN}"
+                            FontWeight="Bold"
+                            Background="OrangeRed"
+                            Foreground="White"
+                            Grid.Row="0"
+                            Grid.RowSpan="2"
+                            Grid.Column="3"
+                            Key="Back">
+                删除
+            </n:NumPadButton>
+            <n:NumPadButton Grid.Row="1"
+                            Grid.Column="0"
+                            Key="NumPad4">
+                4
+            </n:NumPadButton>
+            <n:NumPadButton Grid.Row="1"
+                            Grid.Column="1"
+                            Key="NumPad5">
+                5
+            </n:NumPadButton>
+            <n:NumPadButton Grid.Row="1"
+                            Grid.Column="2"
+                            Key="NumPad6">
+                6
+            </n:NumPadButton>
+            <n:NumPadButton Grid.Row="2"
+                            Grid.Column="0"
+                            Key="NumPad1">
+                1
+            </n:NumPadButton>
+            <n:NumPadButton Grid.Row="2"
+                            Grid.Column="1"
+                            Key="NumPad2">
+                2
+            </n:NumPadButton>
+            <n:NumPadButton Grid.Row="2"
+                            Grid.Column="2"
+                            Key="NumPad3">
+                3
+            </n:NumPadButton>
+            <n:NumPadButton FontWeight="Bold"
+                            Background="DodgerBlue"
+                            Foreground="White"
+                            Height="{x:Static x:Double.NaN}"
+                            Grid.Row="2"
+                            Grid.RowSpan="2"
+                            Grid.Column="3"
+                            Key="Enter">
+                确认
+            </n:NumPadButton>
+            <n:NumPadButton HorizontalAlignment="Stretch"
+                            Width="{x:Static x:Double.NaN}"
+                            Grid.Row="3"
+                            Grid.ColumnSpan="2"
+                            Grid.Column="0"
+                            Key="NumPad0">
+                0
+            </n:NumPadButton>
+            <n:NumPadButton Grid.Row="3"
+                            Grid.Column="2"
+                            Key="Decimal">
+                .
+            </n:NumPadButton>
+        </Grid>
+    </StackPanel>
+</UserControl>

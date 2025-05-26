@@ -1,0 +1,35 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:AvaloniaNumPad.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        xmlns:u="https://irihi.tech/ursa"
+        x:Class="AvaloniaNumPad.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        xmlns:controls="clr-namespace:AvaloniaNumPad.Controls"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="AvaloniaNumPad">
+
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:MainWindowViewModel />
+    </Design.DataContext>
+    <Panel>
+        <StackPanel>
+            <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <TextBlock Text="弹窗展示：" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <!-- 弹窗按钮 -->
+            <Button Margin="10" Classes="Success" Theme="{StaticResource SolidButton}"
+                    Command="{Binding Dialog}">
+                点击弹窗
+            </Button>
+            <TextBlock Text="直接展示：" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <!-- 直接引用 -->
+            <controls:NumPadControl Text="{Binding InputValue}" EnterCommand="{Binding EnterPressed}"></controls:NumPadControl>
+        </StackPanel>
+        <!-- 弹窗遮罩层 -->
+        <u:OverlayDialogHost />
+    </Panel>
+</Window>
