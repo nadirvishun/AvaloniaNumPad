@@ -45,14 +45,14 @@ public partial class MainWindowViewModel : ViewModelBase
         };
         //获取对话框实例，正常应该从依赖注入中获取
         var numPadDialogViewModel = new NumPadDialogViewModel();
-        numPadDialogViewModel.Initialize("");
+        numPadDialogViewModel.Initialize(InputValue);
         await OverlayDialog.ShowModal<NumPadDialogView, NumPadDialogViewModel>(numPadDialogViewModel, options: options);
         var isEnter = numPadDialogViewModel.IsEnter; //是否确认关闭
-        var inputValue = numPadDialogViewModel.InputValue;
+        InputValue = numPadDialogViewModel.InputValue;
         //如果存在车牌简写，则直接请求
-        if (!string.IsNullOrWhiteSpace(inputValue) && isEnter)
+        if (!string.IsNullOrWhiteSpace(InputValue) && isEnter)
         {
-            ToastManager?.Show("输入的数字为：" + inputValue, NotificationType.Success);
+            ToastManager?.Show("输入的数字为：" + InputValue, NotificationType.Success);
         }
     }
 }

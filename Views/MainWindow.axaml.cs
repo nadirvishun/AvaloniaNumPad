@@ -1,5 +1,6 @@
 using System;
 using Avalonia.Controls;
+using Avalonia.Input;
 using Avalonia.Interactivity;
 using AvaloniaNumPad.ViewModels;
 using Ursa.Controls;
@@ -39,5 +40,16 @@ public partial class MainWindow : Window
     {
         _viewModel.ToastManager?.Uninstall();
         base.OnClosed(e);
+    }
+
+
+    /// <summary>
+    /// 焦点时触发
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void OnGotFocus(object? sender, GotFocusEventArgs e)
+    {
+        _viewModel.DialogCommand.Execute(null);
     }
 }
