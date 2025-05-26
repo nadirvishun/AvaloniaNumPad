@@ -62,7 +62,6 @@ public partial class NumPadControl : UserControl
         [Key.NumPad7] = "7",
         [Key.NumPad8] = "8",
         [Key.NumPad9] = "9",
-        [Key.Decimal] = ".",
     };
 
     /// <summary>
@@ -75,6 +74,22 @@ public partial class NumPadControl : UserControl
         {
             Text += s;
         }
+        else if (Key.Decimal == key)
+        {
+            //不能以点开头
+            if (Text == string.Empty)
+            {
+                return;
+            }
+
+            //不能有多个点
+            if (Text.Contains('.'))
+            {
+                return;
+            }
+
+            Text += '.';
+        }
         else if (Key.Back == key)
         {
             if (!string.IsNullOrEmpty(Text))
@@ -84,6 +99,12 @@ public partial class NumPadControl : UserControl
         }
         else if (Key.Enter == key)
         {
+            //如果以.结尾，则去掉
+            if (Text.EndsWith('.'))
+            {
+                Text = Text[..^1];
+            }
+
             //执行command
             if (EnterCommand?.CanExecute(null) == true)
             {
